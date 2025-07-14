@@ -1,0 +1,66 @@
+@page "/CreatePlanHoangnv/update/{Id:int}"
+
+<h3>Cập nhật kế hoạch bỏ thuốc</h3>
+
+@if (isLoading)
+{
+    <p>Đang tải dữ liệu...</p>
+}
+else if (plan == null)
+{
+    <p class="text-danger">Không tìm thấy kế hoạch!</p>
+}
+else if (isUpdated)
+{
+    <div class="alert alert-success">Cập nhật thành công!</div>
+    <button class="btn btn-primary" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Quay lại danh sách</button>
+}
+else
+{
+    <EditForm Model="plan" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="mb-3">
+            <label class="form-label">Tiêu đề kế hoạch</label>
+            <InputText class="form-control" @bind-Value="plan.PlanTitle" />
+            <ValidationMessage For="() => plan.PlanTitle" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ngày bắt đầu</label>
+            <InputDate class="form-control" @bind-Value="plan.StartDate" />
+            <ValidationMessage For="() => plan.StartDate" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ngày kết thúc dự kiến</label>
+            <InputDate class="form-control" @bind-Value="plan.TargetEndDate" />
+            <ValidationMessage For="() => plan.TargetEndDate" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tần suất hút hiện tại (lần/ngày)</label>
+            <InputNumber class="form-control" @bind-Value="plan.CurrentSmokingFrequency" />
+            <ValidationMessage For="() => plan.CurrentSmokingFrequency" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Mục tiêu giảm/ngày</label>
+            <InputNumber class="form-control" @bind-Value="plan.DailyReductionGoal" />
+            <ValidationMessage For="() => plan.DailyReductionGoal" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Lý do bỏ thuốc</label>
+            <InputTextArea class="form-control" @bind-Value="plan.MotivationReason" />
+            <ValidationMessage For="() => plan.MotivationReason" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phương pháp bỏ thuốc</label>
+            <InputText class="form-control" @bind-Value="plan.SelectedApproach" />
+            <ValidationMessage For="() => plan.SelectedApproach" />
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        @if (!string.IsNullOrEmpty(errorMsg))
+        {
+            <div class="alert alert-danger mt-2">@errorMsg</div>
+        }
+    </EditForm>
+}
+
+ 

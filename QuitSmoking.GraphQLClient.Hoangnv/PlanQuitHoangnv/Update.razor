@@ -1,0 +1,59 @@
+@page "/PlanQuitHoangnv/update/{Id:int}"
+
+<h3>Cập nhật phương pháp bỏ thuốc trong kế hoạch</h3>
+
+@if (isLoading)
+{
+    <p>Đang tải dữ liệu...</p>
+}
+else if (planQuitMethod == null)
+{
+    <p class="text-danger">Không tìm thấy phương pháp!</p>
+}
+else if (isUpdated)
+{
+    <div class="alert alert-success">Cập nhật thành công!</div>
+    <button class="btn btn-primary" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Quay lại danh sách</button>
+}
+else
+{
+    <EditForm Model="planQuitMethod" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="mb-3">
+            <InputNumber type="hidden" class="form-control" @bind-Value="planQuitMethod.CreatePlanQuitSmokingHoangNvid" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phương pháp ID</label>
+            <InputNumber class="form-control" @bind-Value="planQuitMethod.QuitMethodHoangNvid" />
+            <ValidationMessage For="() => planQuitMethod.QuitMethodHoangNvid" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ngày bắt đầu</label>
+            <InputDate class="form-control" @bind-Value="planQuitMethod.StartDate" />
+            <ValidationMessage For="() => planQuitMethod.StartDate" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ngày kết thúc</label>
+            <InputDate class="form-control" @bind-Value="planQuitMethod.EndDate" />
+            <ValidationMessage For="() => planQuitMethod.EndDate" />
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Đánh giá</label>
+            <InputNumber class="form-control" @bind-Value="planQuitMethod.UserRating" />
+            <ValidationMessage For="() => planQuitMethod.UserRating" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ghi chú</label>
+            <InputTextArea class="form-control" @bind-Value="planQuitMethod.UserNotes" />
+            <ValidationMessage For="() => planQuitMethod.UserNotes" />
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        @if (!string.IsNullOrEmpty(errorMsg))
+        {
+            <div class="alert alert-danger mt-2">@errorMsg</div>
+        }
+    </EditForm>
+} 
+

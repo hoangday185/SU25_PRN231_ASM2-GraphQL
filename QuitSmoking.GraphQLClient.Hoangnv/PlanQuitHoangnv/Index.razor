@@ -1,0 +1,52 @@
+@page "/PlanQuitHoangnv/Index"
+@using QuitSmoking.GraphQLClient.Hoangnv.Models;
+
+<h3>Danh sách phương pháp bỏ thuốc trong kế hoạch</h3>
+
+@if (listPlanQuitMethods == null)
+{
+    <div>Đang tải trang...</div>
+}
+else
+{
+    <a href="/PlanQuitHoangnv/create" class="btn btn-info">Thêm phương pháp</a>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>ID</th>
+                <th>Kế hoạch ID</th>
+                <th>Phương pháp ID</th>
+                <th>Ngày bắt đầu</th>
+                <th>Ngày kết thúc</th>
+                <th>Thành công?</th>
+                <th>Đánh giá</th>
+                <th>Ghi chú</th>
+                <th>Ngày tạo</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody class="table-primary">
+            @foreach (var item in listPlanQuitMethods)
+            {
+                <tr>
+                    <td>@item.PlanQuitMethodHoangNvid</td>
+                    <td>@item.CreatePlanQuitSmokingHoangNvid</td>
+                    <td>@item.QuitMethodHoangNvid</td>
+                    <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+                    <td>@item.EndDate?.ToString("dd/MM/yyyy")</td>
+                    <td>@(item.IsSuccessful == true ? "Có" : "Không")</td>
+                    <td>@item.UserRating</td>
+                    <td>@item.UserNotes</td>
+                    <td>@item.CreationDateTime?.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="/PlanQuitHoangnv/delete/@item.PlanQuitMethodHoangNvid" class="btn btn-sm btn-primary">Xóa</a>
+                            <a href="/PlanQuitHoangnv/update/@item.PlanQuitMethodHoangNvid" class="btn btn-sm btn-warning">Sửa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} 
+

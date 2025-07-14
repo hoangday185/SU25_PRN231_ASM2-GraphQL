@@ -1,0 +1,6 @@
+@QuitSmoking.GrahpQL.Hoangnv_HostAddress = http://localhost:5069
+
+GET {{QuitSmoking.GrahpQL.Hoangnv_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

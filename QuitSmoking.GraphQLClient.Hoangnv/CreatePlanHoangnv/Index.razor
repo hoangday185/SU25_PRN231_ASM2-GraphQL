@@ -1,0 +1,58 @@
+﻿@page "/CreatePlanHoangnv/Index"
+@using QuitSmoking.GraphQLClient.Hoangnv.Models;
+
+
+<h3>CreatePlanHoangnvList</h3>
+
+@if (listPlan == null)
+{
+    <div>Page loading...</div>
+}else
+{
+    <a href="/CreatePlanHoangnv/create" class="btn btn-info">Create</a>
+    <table class="table table-striped table-bordered table-hover">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Plan Title</th>
+            <th>Start Date</th>
+            <th>Target End Date</th>
+            <th>Current Smoking Frequency</th>
+            <th>Daily Reduction Goal</th>
+            <th>Motivation Reason</th>
+            <th>Selected Approach</th>
+            <th>Is Active</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="table-primary">
+        @foreach (var plan in listPlan)
+        {
+            <tr>
+                <td>@plan.CreatePlanQuitSmokingHoangNvid</td>
+                <td>@plan.UserAccountHoangNvid</td>
+                <td>@plan.PlanTitle</td>
+                <td>@plan.StartDate.ToString("dd/MM/yyyy")</td>
+                <td>@plan.TargetEndDate.ToString("dd/MM/yyyy")</td>
+                <td>@plan.CurrentSmokingFrequency</td>
+                <td>@plan.DailyReductionGoal</td>
+                <td>@plan.MotivationReason</td>
+                <td>@plan.SelectedApproach</td>
+                <td>@(plan.IsActive == true ? "Yes" : "No")</td>
+                <td>@plan.CreationDateTime?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a href="/CreatePlanHoangnv/delete/@plan.CreatePlanQuitSmokingHoangNvid" class="btn btn-sm btn-primary">Delete</a>
+                        <a href="/CreatePlanHoangnv/update/@plan.CreatePlanQuitSmokingHoangNvid" class="btn btn-sm btn-warning">Edit</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+
+

@@ -1,0 +1,55 @@
+@page "/QuitMethodHoangnv/create"
+
+<h3>Thêm phương pháp bỏ thuốc mới</h3>
+
+<EditForm Model="method" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label class="form-label">Tên phương pháp *</label>
+        <InputText class="form-control" @bind-Value="method.MethodName" />
+        <ValidationMessage For="@(() => method.MethodName)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Mô tả *</label>
+        <InputTextArea class="form-control" @bind-Value="method.MethodDescription" />
+        <ValidationMessage For="@(() => method.MethodDescription)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Hiệu quả (1-10)</label>
+        <InputNumber class="form-control" @bind-Value="method.EffectivenessRating" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Độ khó (1-10)</label>
+        <InputNumber class="form-control" @bind-Value="method.DifficultyLevel" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Thời gian khuyến nghị (ngày)</label>
+        <InputNumber class="form-control" @bind-Value="method.RecommendedDuration" />
+    </div>
+    <div class="mb-3 form-check">
+        <InputCheckbox class="form-check-input" @bind-Value="RequiresMedical" />
+        <label class="form-check-label">Cần tư vấn y tế</label>
+    </div>
+    <div class="mb-3 form-check">
+        <InputCheckbox class="form-check-input" @bind-Value="RequiresCounseling" />
+        <label class="form-check-label">Cần tư vấn tâm lý</label>
+    </div>
+    <div class="mb-3 form-check">
+        <InputCheckbox class="form-check-input" @bind-Value="IsPopular" />
+        <label class="form-check-label">Phổ biến</label>
+    </div>
+    <button type="submit" class="btn btn-primary" >Tạo mới</button>
+    <button type="button" class="btn btn-secondary ms-2" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Hủy</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger mt-2">@errorMessage</div>
+}
+
+@code {
+    
+}
+
+ 

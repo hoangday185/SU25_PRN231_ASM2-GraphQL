@@ -1,0 +1,58 @@
+@page "/QuitMethodHoangnv"
+
+
+<h3>Danh sách phương pháp bỏ thuốc</h3>
+
+<button class="btn btn-primary mb-2" @onclick="CreateMethod">Thêm phương pháp</button>
+
+@if (isLoading)
+{
+    <p>Đang tải dữ liệu...</p>
+}
+else if (quitMethods == null || !quitMethods.Any())
+{
+    <p>Không có phương pháp nào.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên phương pháp</th>
+                <th>Mô tả</th>
+                <th>Hiệu quả</th>
+                <th>Độ khó</th>
+                <th>Thời gian khuyến nghị</th>
+                <th>Y tế</th>
+                <th>Tư vấn</th>
+                <th>Phổ biến</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var method in quitMethods)
+            {
+                <tr>
+                    <td>@method.QuitMethodHoangNvid</td>
+                    <td>@method.MethodName</td>
+                    <td>@method.MethodDescription</td>
+                    <td>@method.EffectivenessRating</td>
+                    <td>@method.DifficultyLevel</td>
+                    <td>@method.RecommendedDuration</td>
+                    <td>@(method.RequiresMedical == true ? "Có" : "Không")</td>
+                    <td>@(method.RequiresCounseling == true ? "Có" : "Không")</td>
+                    <td>@(method.IsPopular == true ? "Có" : "Không")</td>
+                    <td>@(method.IsActive == true ? "Hoạt động" : "Ẩn")</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm me-1" @onclick="() => EditMethod(method.QuitMethodHoangNvid)">Edit</button>
+                        <button class="btn btn-danger btn-sm" @onclick="() => DeleteMethod(method.QuitMethodHoangNvid)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+ 

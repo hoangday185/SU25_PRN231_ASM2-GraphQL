@@ -1,0 +1,36 @@
+@page "/PlanQuitHoangnv/create"
+
+<h3>Thêm phương pháp bỏ thuốc vào kế hoạch</h3>
+<button class="btn btn-primary" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Quay lại danh sách</button>
+
+<EditForm Model="plan" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label class="form-label">Phương pháp ID</label>
+        <InputNumber class="form-control" @bind-Value="plan.QuitMethodHoangNvid" />
+        <ValidationMessage For="() => plan.QuitMethodHoangNvid" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ngày bắt đầu</label>
+        <InputDate class="form-control" @bind-Value="plan.StartDate" />
+        <ValidationMessage For="() => plan.StartDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ngày kết thúc</label>
+        <InputDate class="form-control" @bind-Value="plan.EndDate" />
+        <ValidationMessage For="() => plan.EndDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Đánh giá</label>
+        <InputNumber class="form-control" @bind-Value="plan.UserRating" />
+        <ValidationMessage For="() => plan.UserRating" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ghi chú</label>
+        <InputTextArea class="form-control" @bind-Value="plan.UserNotes" />
+        <ValidationMessage For="() => plan.UserNotes" />
+    </div>
+    <button type="submit" class="btn btn-primary">Thêm phương pháp</button>
+</EditForm> 
+

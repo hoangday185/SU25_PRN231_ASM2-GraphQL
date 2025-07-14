@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36109.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuitSmoking.Repositories.HoangNV", "..\SU25_PRN231_SE1713_SE161371_HoangNV\QuitSmoking.Repositories.HoangNV\QuitSmoking.Repositories.HoangNV.csproj", "{736B6360-0ACE-3798-FF9B-78DE46F3AF56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuitSmoking.Services.HoangNV", "..\SU25_PRN231_SE1713_SE161371_HoangNV\QuitSmoking.Services.HoangNV\QuitSmoking.Services.HoangNV.csproj", "{93887772-E24F-ED2E-4A69-71E9E516567A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuitSmoking.GrahpQL.Hoangnv", "QuitSmoking.GrahpQL.Hoangnv\QuitSmoking.GrahpQL.Hoangnv.csproj", "{DA286F36-C395-4DC8-8D73-81EDE3F89C2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuitSmoking.GraphQLClient.Hoangnv", "QuitSmoking.GraphQLClient.Hoangnv\QuitSmoking.GraphQLClient.Hoangnv.csproj", "{62064206-E468-47DB-AFD5-E0E21B11636D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{736B6360-0ACE-3798-FF9B-78DE46F3AF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736B6360-0ACE-3798-FF9B-78DE46F3AF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736B6360-0ACE-3798-FF9B-78DE46F3AF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736B6360-0ACE-3798-FF9B-78DE46F3AF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93887772-E24F-ED2E-4A69-71E9E516567A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93887772-E24F-ED2E-4A69-71E9E516567A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93887772-E24F-ED2E-4A69-71E9E516567A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93887772-E24F-ED2E-4A69-71E9E516567A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA286F36-C395-4DC8-8D73-81EDE3F89C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA286F36-C395-4DC8-8D73-81EDE3F89C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA286F36-C395-4DC8-8D73-81EDE3F89C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA286F36-C395-4DC8-8D73-81EDE3F89C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62064206-E468-47DB-AFD5-E0E21B11636D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62064206-E468-47DB-AFD5-E0E21B11636D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62064206-E468-47DB-AFD5-E0E21B11636D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62064206-E468-47DB-AFD5-E0E21B11636D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7EE1859-602B-478E-AC7A-29D137667AFC}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+@page "/PlanQuitHoangnv/delete/{Id:int}"
+@using QuitSmoking.GraphQLClient.Hoangnv.Models;
+
+<h3>Xóa phương pháp bỏ thuốc trong kế hoạch</h3>
+
+@if (isLoading)
+{
+    <p>Đang tải dữ liệu...</p>
+}
+else if (planQuitMethod == null)
+{
+    <p class="text-danger">Không tìm thấy phương pháp!</p>
+}
+else if (isDeleted)
+{
+    <div class="alert alert-success">Đã xóa thành công!</div>
+    <button class="btn btn-primary" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Quay lại danh sách</button>
+}
+else
+{
+    <div class="mb-3">
+        <b>Kế hoạch ID:</b> @planQuitMethod.CreatePlanQuitSmokingHoangNvid
+    </div>
+    <div class="mb-3">
+        <b>Phương pháp ID:</b> @planQuitMethod.QuitMethodHoangNvid
+    </div>
+    <div class="mb-3">
+        <b>Ngày bắt đầu:</b> @planQuitMethod.StartDate.ToString("yyyy-MM-dd")
+    </div>
+    <div class="mb-3">
+        <b>Ghi chú:</b> @planQuitMethod.UserNotes
+    </div>
+    <button class="btn btn-danger" @onclick="OnDelete">Xác nhận xóa</button>
+    @if (!string.IsNullOrEmpty(errorMsg))
+    {
+        <div class="alert alert-danger mt-2">@errorMsg</div>
+    }
+} 
+

@@ -1,0 +1,32 @@
+@page "/QuitMethodHoangnv/delete/{id:int}"
+
+
+<h3>Xóa phương pháp bỏ thuốc</h3>
+
+@if (isLoading)
+{
+    <p>Đang tải dữ liệu...</p>
+}
+else if (errorMessage != null)
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (method != null)
+{
+    <div class="alert alert-warning">
+        <p>Bạn có chắc chắn muốn xóa phương pháp sau?</p>
+        <ul>
+            <li><b>Tên phương pháp:</b> @method.MethodName</li>
+            <li><b>Mô tả:</b> @method.MethodDescription</li>
+        </ul>
+        <button class="btn btn-danger" @onclick="DeleteMethod" disabled="@isSubmitting">Xác nhận xóa</button>
+        <button class="btn btn-secondary ms-2" @onclick="() => _navigationManager.NavigateTo(redirectUrl, true)">Hủy</button>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success mt-2">@successMessage</div>
+}
+
+ 
