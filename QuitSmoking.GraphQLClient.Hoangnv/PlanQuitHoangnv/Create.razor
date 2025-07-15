@@ -8,8 +8,19 @@
     <ValidationSummary />
     <div class="mb-3">
         <label class="form-label">Phương pháp ID</label>
-        <InputNumber class="form-control" @bind-Value="plan.QuitMethodHoangNvid" />
+      
+          <select @bind="plan.QuitMethodHoangNvid" class="form-control">
+
+            @{
+                foreach (var item in listMethod)
+                {
+                    <option value="@item.QuitMethodHoangNvid">@item.MethodName</option>
+                }
+            }
+
+          </select>
         <ValidationMessage For="() => plan.QuitMethodHoangNvid" />
+       
     </div>
     <div class="mb-3">
         <label class="form-label">Ngày bắt đầu</label>

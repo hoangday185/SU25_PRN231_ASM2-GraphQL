@@ -1,4 +1,4 @@
-@page "/PlanQuitHoangnv/Index"
+@page "/PlanQuitHoangnv/Index/{Id:int}"
 @using QuitSmoking.GraphQLClient.Hoangnv.Models;
 
 <h3>Danh sách phương pháp bỏ thuốc trong kế hoạch</h3>
@@ -40,8 +40,8 @@ else
                     <td>@item.CreationDateTime?.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <a href="/PlanQuitHoangnv/delete/@item.PlanQuitMethodHoangNvid" class="btn btn-sm btn-primary">Xóa</a>
-                            <a href="/PlanQuitHoangnv/update/@item.PlanQuitMethodHoangNvid" class="btn btn-sm btn-warning">Sửa</a>
+                            @* <a href="/PlanQuitHoangnv/delete/@item.PlanQuitMethodHoangNvid?CreateId=@Id" class="btn btn-sm btn-primary">Xóa</a> *@
+                            <a href="/PlanQuitHoangnv/update/@item.PlanQuitMethodHoangNvid?CreateId=@Id" class="btn btn-sm btn-warning">Sửa</a>
                         </div>
                     </td>
                 </tr>

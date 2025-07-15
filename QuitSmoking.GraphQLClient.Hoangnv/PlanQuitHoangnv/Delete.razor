@@ -1,11 +1,16 @@
 @page "/PlanQuitHoangnv/delete/{Id:int}"
 @using QuitSmoking.GraphQLClient.Hoangnv.Models;
+@using Microsoft.AspNetCore.Components
 
 <h3>Xóa phương pháp bỏ thuốc trong kế hoạch</h3>
 
 @if (isLoading)
 {
     <p>Đang tải dữ liệu...</p>
+}
+else if (!string.IsNullOrEmpty(errorMsg))
+{
+    <div class="alert alert-danger">@errorMsg</div>
 }
 else if (planQuitMethod == null)
 {
@@ -31,9 +36,5 @@ else
         <b>Ghi chú:</b> @planQuitMethod.UserNotes
     </div>
     <button class="btn btn-danger" @onclick="OnDelete">Xác nhận xóa</button>
-    @if (!string.IsNullOrEmpty(errorMsg))
-    {
-        <div class="alert alert-danger mt-2">@errorMsg</div>
-    }
 } 
 

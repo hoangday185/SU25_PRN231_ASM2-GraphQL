@@ -62,10 +62,16 @@ namespace QuitSmoking.GrahpQL.Hoangnv.GraphQLs
             return await _serviceProviders.QuitMethodHoangNvService.getMethodWithPaginationAsync(page, pageSize, search);
         }
 
-        // Query để lấy tất cả kế hoạch phương pháp
         public async Task<List<PlanQuitMethodHoangNv>> GetAllPlanQuitMethods()
         {
             return await _serviceProviders.PlanQuitHoangNvService.GetAllPlansAsync();
+        }
+
+
+        // Query để lấy tất cả kế hoạch phương pháp
+        public async Task<List<PlanQuitMethodHoangNv>> GetAllPlanQuitMethodsByCreateId(int id)
+        {
+            return await _serviceProviders.PlanQuitHoangNvService.GetAllPlanQuitByCreateId(id);
         }
 
         // Query để lấy kế hoạch phương pháp theo ID

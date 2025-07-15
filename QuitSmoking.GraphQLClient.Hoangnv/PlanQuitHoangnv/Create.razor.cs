@@ -4,18 +4,29 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.PlanQuitHoangnv
 {
     public partial class Create
     {
-        private PlanQuitMethodHoangNv plan = new();
+        private PlanQuitHoangnvCreateDto plan = new();
         private string redirectUrl = "/PlanQuitHoangnv/Index";
+        public List<QuitMethodHoangNv> listMethod;
         protected override async Task OnInitializedAsync()
         {
-            await base.OnInitializedAsync();
+            try
+            {
+                listMethod = await _graphQLConsumer.GetAllQuitMethods()!;
+            }
+            catch
+            {
+
+            }
+
         }
 
         public async Task HandleValidSubmit()
         {
             try
             {
-                //var result = await _graphQLConsumer.Cre
+                plan.CreatePlanQuitSmokingHoangNvid = 28;
+                await _graphQLConsumer.CreatePlanQuitMethod(plan);
+               // _navigationManager.NavigateTo(redirectUrl, true);
             }
             catch (Exception ex)
             {

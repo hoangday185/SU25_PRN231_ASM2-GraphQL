@@ -266,19 +266,7 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.GraphQLClients
         {
             var mutation = @"
                 mutation($method: QuitMethodHoangNvInput!) {
-                    createQuitMethod(method: $method) {
-                        quitMethodHoangNvid
-                        methodName
-                        methodDescription
-                        effectivenessRating
-                        difficultyLevel
-                        recommendedDuration
-                        requiresMedical
-                        requiresCounseling
-                        isPopular
-                        creationDateTime
-                        isActive
-                    }
+                    createQuitMethod(method: $method)
                 }
             ";
             var request = new GraphQLRequest
@@ -345,20 +333,45 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.GraphQLClients
                 query {
                     allPlanQuitMethods {
                         planQuitMethodHoangNvid
-                        userAccountHoangNvid
-                        planTitle
+                        quitMethodHoangNvid 
                         startDate
-                        targetEndDate
-                        currentSmokingFrequency
-                        dailyReductionGoal
-                        motivationReason
-                        selectedApproach
-                        isActive
-                        creationDateTime
+                        endDate
+                        isSuccessful
+                        userRating
+                        userNotes
                     }
                 }";
             var response = await _graphQLClient.SendQueryAsync<GetAllPlanQuitMethodsResponse>(query);
             return response.Data?.allPlanQuitMethods ?? new List<PlanQuitMethodHoangNv>();
+        }
+
+        public async Task<List<PlanQuitMethodHoangNv>> GetAllPlanQuitMethodsByCreateId(int id){
+             var query = @"
+                query($id: Int!) {
+                    allPlanQuitMethodsByCreateId(id : $id) {
+                       planQuitMethodHoangNvid
+                        quitMethodHoangNvid 
+                        startDate
+                        endDate
+                        isSuccessful
+                        userRating
+                        userNotes
+                    }
+                }";
+
+            var request = new GraphQLRequest
+            {
+                Query = query,
+                Variables = new { id }
+            };
+
+            var response = await _graphQLClient.SendQueryAsync<GetAllPlanQuitMethodsResponseWithCreateId>(request);
+            return response.Data?.allPlanQuitMethodsByCreateId ?? new List<PlanQuitMethodHoangNv>();
+        }
+
+        public class GetAllPlanQuitMethodsResponseWithCreateId
+        {
+            public List<PlanQuitMethodHoangNv> allPlanQuitMethodsByCreateId { get; set; }
         }
 
         public class GetAllPlanQuitMethodsResponse
@@ -372,16 +385,12 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.GraphQLClients
                 query($id: Int!) {
                     planQuitMethodById(id: $id) {
                         planQuitMethodHoangNvid
-                        userAccountHoangNvid
-                        planTitle
+                        quitMethodHoangNvid 
                         startDate
-                        targetEndDate
-                        currentSmokingFrequency
-                        dailyReductionGoal
-                        motivationReason
-                        selectedApproach
-                        isActive
-                        creationDateTime
+                        endDate
+                        isSuccessful
+                        userRating
+                        userNotes
                     }
                 }";
             var request = new GraphQLRequest
@@ -398,28 +407,16 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.GraphQLClients
             public PlanQuitMethodHoangNv planQuitMethodById { get; set; }
         }
 
-        public async Task<PlanQuitMethodHoangNv> CreatePlanQuitMethod(PlanQuitMethodHoangNv method)
+        public async Task<PlanQuitMethodHoangNv> CreatePlanQuitMethod(PlanQuitHoangnvCreateDto dto)
         {
             var mutation = @"
-                mutation($method: PlanQuitMethodHoangNvInput!) {
-                    createPlanQuitMethod(method: $method) {
-                        planQuitMethodHoangNvid
-                        userAccountHoangNvid
-                        planTitle
-                        startDate
-                        targetEndDate
-                        currentSmokingFrequency
-                        dailyReductionGoal
-                        motivationReason
-                        selectedApproach
-                        isActive
-                        creationDateTime
-                    }
+                mutation($dto: PlanQuitMethodHoangNvCreateDtoInput!) {
+                    createPlanQuitMethod(dto: $dto)
                 }";
             var request = new GraphQLRequest
             {
                 Query = mutation,
-                Variables = new { method }
+                Variables = new { dto }
             };
             var response = await _graphQLClient.SendMutationAsync<CreatePlanQuitMethodResponse>(request);
             return response.Data?.createPlanQuitMethod;
@@ -430,28 +427,24 @@ namespace QuitSmoking.GraphQLClient.Hoangnv.GraphQLClients
             public PlanQuitMethodHoangNv createPlanQuitMethod { get; set; }
         }
 
-        public async Task<PlanQuitMethodHoangNv> UpdatePlanQuitMethod(PlanQuitMethodHoangNv method)
+        public async Task<PlanQuitMethodHoangNv> UpdatePlanQuitMethod(PlanQuitHoangnvUpdateDto dto)
         {
             var mutation = @"
-                mutation($method: PlanQuitMethodHoangNvInput!) {
-                    updatePlanQuitMethod(method: $method) {
+                mutation($dto:PlanQuitHoangnvUpdateDtoInput!) {
+                    updatePlanQuitMethod(dto: $dto) {
                         planQuitMethodHoangNvid
-                        userAccountHoangNvid
-                        planTitle
+                        quitMethodHoangNvid 
                         startDate
-                        targetEndDate
-                        currentSmokingFrequency
-                        dailyReductionGoal
-                        motivationReason
-                        selectedApproach
-                        isActive
-                        creationDateTime
+                        endDate
+                        isSuccessful
+                        userRating
+                        userNotes
                     }
                 }";
             var request = new GraphQLRequest
             {
                 Query = mutation,
-                Variables = new { method }
+                Variables = new { dto }
             };
             var response = await _graphQLClient.SendMutationAsync<UpdatePlanQuitMethodResponse>(request);
             return response.Data?.updatePlanQuitMethod;

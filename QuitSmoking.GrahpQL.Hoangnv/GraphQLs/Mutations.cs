@@ -75,10 +75,10 @@ namespace QuitSmoking.GrahpQL.Hoangnv.GraphQLs
         }
 
         // Mutation để tạo phương pháp bỏ thuốc mới
-        public async Task<QuitMethodHoangNv> CreateQuitMethod(QuitMethodHoangNv method)
+        public async Task<string> CreateQuitMethod(QuitMethodHoangNv method)
         {
-            var id = await _serviceProviders.QuitMethodHoangNvService.CreateMethodAsync(method);
-            return await _serviceProviders.QuitMethodHoangNvService.GetMethodByIdAsync(id);
+             await _serviceProviders.QuitMethodHoangNvService.CreateMethodAsync(method);
+            return "Create method success";
         }
 
         // Mutation để cập nhật phương pháp bỏ thuốc
@@ -98,22 +98,48 @@ namespace QuitSmoking.GrahpQL.Hoangnv.GraphQLs
         }
 
         // Mutation để tạo kế hoạch phương pháp mới
-        public async Task<PlanQuitMethodHoangNv> CreatePlanQuitMethod(PlanQuitMethodHoangNv planMethod)
+        public async Task<string> CreatePlanQuitMethod(PlanQuitMethodHoangNvCreateDto dto)
         {
-            var id = await _serviceProviders.PlanQuitHoangNvService.CreatePlanAsync(planMethod);
-            return await _serviceProviders.PlanQuitHoangNvService.GetPlanByIdAsync(id);
+            // Map DTO sang model
+            var plan = new PlanQuitMethodHoangNv
+            {
+                CreatePlanQuitSmokingHoangNvid = dto.CreatePlanQuitSmokingHoangNvid,
+                QuitMethodHoangNvid = dto.QuitMethodHoangNvid,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                IsSuccessful = false,
+                UserRating = dto.UserRating,
+                UserNotes = dto.UserNotes,
+            };
+             await _serviceProviders.PlanQuitHoangNvService.CreatePlanAsync(plan);
+            return "Create plan method success";
         }
 
         // Mutation để cập nhật kế hoạch phương pháp
-        public async Task<PlanQuitMethodHoangNv?> UpdatePlanQuitMethod(PlanQuitMethodHoangNv planMethod)
+        public async Task<PlanQuitMethodHoangNv?> UpdatePlanQuitMethod(PlanQuitHoangnvUpdateDto dto)
         {
-            var id = await _serviceProviders.PlanQuitHoangNvService.UpdatePlanAsync(planMethod);
-            return await _serviceProviders.PlanQuitHoangNvService.GetPlanByIdAsync(id);
+            // Lấy entity gốc từ DB
+            var planMethod = await _serviceProviders.PlanQuitHoangNvService.GetPlanByIdAsync(dto.PlanQuitMethodHoangNvid);
+            if (planMethod == null) return null;
+
+            // Map các trường từ DTO sang entity
+            planMethod.CreatePlanQuitSmokingHoangNvid = dto.CreatePlanQuitSmokingHoangNvid;
+            planMethod.QuitMethodHoangNvid = dto.QuitMethodHoangNvid;
+            planMethod.StartDate = dto.StartDate;
+            planMethod.EndDate = dto.EndDate;
+            planMethod.IsSuccessful = dto.IsSuccessful;
+            planMethod.UserRating = dto.UserRating;
+            planMethod.UserNotes = dto.UserNotes;
+
+            // Gọi update
+            await _serviceProviders.PlanQuitHoangNvService.UpdatePlanAsync(planMethod);
+            return await _serviceProviders.PlanQuitHoangNvService.GetPlanByIdAsync(planMethod.PlanQuitMethodHoangNvid);
         }
 
         // Mutation để xóa kế hoạch phương pháp
         public async Task<bool> DeletePlanQuitMethod(int id)
         {
+         
             return await _serviceProviders.PlanQuitHoangNvService.DeletePlanAsync(id);
         }
 
